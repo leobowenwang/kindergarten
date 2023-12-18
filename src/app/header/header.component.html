@@ -1,6 +1,9 @@
-<div class="flex">
+<mat-toolbar color="primary">
+  <div class="toolbar-left">
     <h1>{{ title }}</h1>
-    <img width="500" src={{imagePath}}>&nbsp;&nbsp;
-    <a [routerLink]="['/dashboard']">Dashboard</a>&nbsp;&nbsp;
-    <a [routerLink]="['/about']">About</a>
-</div>
+    <button mat-button [routerLink]="['/dashboard']">Dashboard</button>
+    <button mat-button [routerLink]="['/about']">About</button>
+  </div>
+
+  <img [src]="imagePath" class="toolbar-image">
+</mat-toolbar>
