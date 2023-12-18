@@ -20,10 +20,10 @@ export class BackendService {
       });
   }
 
-  public getChildren(page: number) {
+  public getChildren(page: number, pageSize: number) {
     this.http
       .get<ChildResponse[]>(
-        `http://localhost:5000/childs?_expand=kindergarden&_page=${page}&_limit=${CHILDREN_PER_PAGE}`,
+        `http://localhost:5000/childs?_expand=kindergarden&_page=${page}&_limit=${pageSize}`,
         { observe: 'response' }
       )
       .subscribe((data) => {
@@ -35,17 +35,21 @@ export class BackendService {
       });
   }
 
-  public addChildData(child: Child, page: number): Observable<any> {
+  public addChildData(
+    child: Child,
+    page: number,
+    pageSize: number
+  ): Observable<any> {
     return this.http
       .post('http://localhost:5000/childs', child)
-      .pipe(tap(() => this.getChildren(page)));
+      .pipe(tap(() => this.getChildren(page, pageSize)));
   }
 
-  public deleteChildData(childId: string, page: number) {
+  public deleteChildData(childId: string, page: number, pageSize: number) {
     this.http
       .delete(`http://localhost:5000/childs/${childId}`)
-      .subscribe((_) => {
-        this.getChildren(page);
+      .subscribe(() => {
+        this.getChildren(page, pageSize);
       });
   }
 }

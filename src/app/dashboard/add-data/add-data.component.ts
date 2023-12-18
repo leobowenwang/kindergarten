@@ -18,6 +18,7 @@ export class AddDataComponent implements OnInit {
   ) {}
   public addChildForm: any;
   @Input() currentPage!: number;
+  @Input() currentPageSize!: number;
 
   ngOnInit(): void {
     this.addChildForm = this.formbuilder.group({
@@ -31,7 +32,11 @@ export class AddDataComponent implements OnInit {
     if (this.addChildForm.valid) {
       console.log(this.currentPage);
       this.backendService
-        .addChildData(this.addChildForm.value, this.currentPage)
+        .addChildData(
+          this.addChildForm.value,
+          this.currentPage,
+          this.currentPageSize
+        )
         .subscribe(() => {
           this.showNotification = true;
           setTimeout(() => (this.showNotification = false), 3000);

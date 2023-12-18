@@ -19,6 +19,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatPaginatorModule } from '@angular/material/paginator';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,6 +46,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatDatepickerModule,
     MatNativeDateModule,
     MatToolbarModule,
+    MatPaginatorModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
