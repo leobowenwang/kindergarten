@@ -21,6 +21,15 @@ export class DataComponent implements OnInit {
   @Input() currentPageSize: number = 3;
   @Output() selectPageEvent = new EventEmitter<number>();
 
+  displayedColumns: string[] = [
+    'name',
+    'kindergarten',
+    'address',
+    'age',
+    'birthdate',
+    'actions',
+  ];
+
   constructor(
     public storeService: StoreService,
     private backendService: BackendService
