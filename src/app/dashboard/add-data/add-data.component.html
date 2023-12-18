@@ -33,4 +33,8 @@
     </mat-form-field><br />
 
     <button mat-raised-button color="primary" type="submit">Erfassen</button>
+
+    <div *ngIf="showNotification" class="alert alert-success mt-3">
+        Kind erfolgreich registriert!
+    </div>
 </form>
