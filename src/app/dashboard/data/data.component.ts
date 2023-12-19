@@ -18,7 +18,6 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 export class DataComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @Input() currentPage: number = 1;
-  @Input() currentPageSize: number = 2;
   @Output() selectPageEvent = new EventEmitter<number>();
   showNotification = false;
 
@@ -36,16 +35,22 @@ export class DataComponent implements OnInit {
     private backendService: BackendService
   ) {}
 
-  ngOnInit(): void {
-    this.backendService.getChildren(this.currentPage, this.currentPageSize);
+  ngOnInit(): void {}
+
+  ngAfterViewInit(): void {
+    const pageSize = this.paginator.pageSize;
+    this.backendService.getChildren(this.currentPage, pageSize);
   }
 
-  getAge(birthDate: string) {
-    var today = new Date();
-    var birthDateTimestamp = new Date(birthDate);
-    var age = today.getFullYear() - birthDateTimestamp.getFullYear();
-    var m = today.getMonth() - birthDateTimestamp.getMonth();
-    if (m < 0 || (m === 0 && today.getDate() < birthDateTimestamp.getDate())) {
+  getAge(birthDate: string): number {
+    const today = new Date();
+    const birthDateTimestamp = new Date(birthDate);
+    let age = today.getFullYear() - birthDateTimestamp.getFullYear();
+    const monthDiff = today.getMonth() - birthDateTimestamp.getMonth();
+    if (
+      monthDiff < 0 ||
+      (monthDiff === 0 && today.getDate() < birthDateTimestamp.getDate())
+    ) {
       age--;
     }
     return age;
@@ -53,16 +58,17 @@ export class DataComponent implements OnInit {
 
   selectPage(event: PageEvent): void {
     this.currentPage = event.pageIndex + 1;
-    this.currentPageSize = event.pageSize;
-    this.backendService.getChildren(this.currentPage, this.currentPageSize);
+    this.backendService.getChildren(this.currentPage, event.pageSize);
   }
 
-  public cancelRegistration(childId: string) {
-    this.backendService
-      .deleteChildData(childId, this.currentPage, this.currentPageSize)
-      .subscribe(() => {
-        this.showNotification = true;
-        setTimeout(() => (this.showNotification = false), 3000);
-      });
+  public cancelRegistration(childId: string): void {
+    if (this.paginator) {
+      this.backendService
+        .deleteChildData(childId, this.currentPage, this.paginator.pageSize)
+        .subscribe(() => {
+          this.showNotification = true;
+          setTimeout(() => (this.showNotification = false), 3000);
+        });
+    }
   }
 }

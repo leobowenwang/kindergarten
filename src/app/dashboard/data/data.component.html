@@ -38,8 +38,9 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
     </mat-table>
-    <mat-paginator [length]="storeService.childrenTotalCount" [pageSize]="currentPageSize"
-        [pageSizeOptions]="[2, 5, 10]" (page)="selectPage($event)">
+
+    <mat-paginator [length]="storeService.childrenTotalCount" [pageSize]="5" [pageSizeOptions]="[3, 5, 10]"
+        (page)="selectPage($event)">
     </mat-paginator>
 
     <div *ngIf="showNotification" class="alert alert-danger mt-3">
