@@ -30,7 +30,10 @@ export class AddDataComponent implements OnInit {
   public addChildForm: any;
   @Input() currentPage!: number;
   @Input() currentPageSize!: number;
-  @Output() operationSuccess = new EventEmitter<{ message: string; type: string; }>();
+  @Output() operationSuccess = new EventEmitter<{
+    message: string;
+    type: string;
+  }>();
 
   ngOnInit(): void {
     const minDate = new Date('2018-01-01');
@@ -50,14 +53,17 @@ export class AddDataComponent implements OnInit {
     if (this.addChildForm.valid) {
       console.log(this.currentPage);
       this.backendService
-      .addChildData(
-        this.addChildForm.value,
-        this.currentPage,
-        this.currentPageSize
-      )
-      .subscribe(() => {
-        this.operationSuccess.emit({ message: 'Kind erfolgreich registriert!', type: 'registered' });
-      });
+        .addChildData(
+          this.addChildForm.value,
+          this.currentPage,
+          this.currentPageSize
+        )
+        .subscribe(() => {
+          this.operationSuccess.emit({
+            message: 'Kind erfolgreich registriert!',
+            type: 'registered',
+          });
+        });
     }
   }
 }

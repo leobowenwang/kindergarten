@@ -1,39 +1,41 @@
-<form [formGroup]="addChildForm" (ngSubmit)="onSubmit()">
-    <h2>Ihr Kind anmelden!</h2>
+<mat-card class="light-purple-background">
+    <form [formGroup]="addChildForm" (ngSubmit)="onSubmit()" class="form-container">
+        <h2>Ihr Kind anmelden!</h2>
 
-    <mat-form-field appearance="fill">
-        <mat-label>Name</mat-label>
-        <input matInput placeholder="Name" formControlName="name">
-        <mat-error *ngIf="addChildForm.get('name').hasError('required')">
-            Name ist erforderlich.
-        </mat-error>
-    </mat-form-field><br />
+        <mat-form-field appearance="fill">
+            <mat-label>Name</mat-label>
+            <input matInput placeholder="Name" formControlName="name">
+            <mat-error *ngIf="addChildForm.get('name').hasError('required')">
+                Name ist erforderlich.
+            </mat-error>
+        </mat-form-field><br />
 
-    <mat-form-field appearance="fill">
-        <mat-label>Geburtsdatum</mat-label>
-        <input matInput [matDatepicker]="picker" placeholder="Geburtsdatum" formControlName="birthDate">
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-        <mat-error *ngIf="addChildForm.get('birthDate').hasError('required')">
-            Geburtsdatum ist erforderlich.
-        </mat-error>
-        <mat-error *ngIf="addChildForm.get('birthDate').hasError('dateRange')">
-            Das Datum muss zwischen heute und 01.01.2018 sein.
-        </mat-error>
-    </mat-form-field><br />
+        <mat-form-field appearance="fill">
+            <mat-label>Geburtsdatum</mat-label>
+            <input matInput [matDatepicker]="picker" placeholder="Geburtsdatum" formControlName="birthDate">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngIf="addChildForm.get('birthDate').hasError('required')">
+                Geburtsdatum ist erforderlich.
+            </mat-error>
+            <mat-error *ngIf="addChildForm.get('birthDate').hasError('dateRange')">
+                Das Datum muss zwischen heute und 01.01.2018 sein.
+            </mat-error>
+        </mat-form-field><br />
 
-    <mat-form-field appearance="fill">
-        <mat-label>Kindergarten</mat-label>
-        <mat-select formControlName="kindergardenId">
-            <mat-option value="" disabled>Bitte auswählen</mat-option>
-            <mat-option *ngFor="let kindergarden of storeService.kindergardens" [value]="kindergarden.id">
-                {{kindergarden.name}}, {{kindergarden.address}}
-            </mat-option>
-        </mat-select>
-        <mat-error *ngIf="addChildForm.get('kindergardenId').hasError('required')">
-            Ein Kindergarten muss ausgewählt werden.
-        </mat-error>
-    </mat-form-field><br />
+        <mat-form-field appearance="fill">
+            <mat-label>Kindergarten</mat-label>
+            <mat-select formControlName="kindergardenId">
+                <mat-option value="" disabled>Bitte auswählen</mat-option>
+                <mat-option *ngFor="let kindergarden of storeService.kindergardens" [value]="kindergarden.id">
+                    {{kindergarden.name}}, {{kindergarden.address}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="addChildForm.get('kindergardenId').hasError('required')">
+                Ein Kindergarten muss ausgewählt werden.
+            </mat-error>
+        </mat-form-field><br />
 
-    <button mat-raised-button color="primary" type="submit">Erfassen</button>
-</form>
+        <button mat-raised-button color="primary" type="submit" class="submit-button">Erfassen</button>
+    </form>
+</mat-card>

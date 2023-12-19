@@ -6,11 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent {
+  public modalMessage: string = '';
+  public showModal: boolean = false;
   public currentPage: number = 1;
   public showAddData = true;
-  isRegistered = false;
-  showNotification = false;
-  notificationMessage = '';
 
   receiveMessage(newPageCount: number) {
     this.currentPage = newPageCount;
@@ -20,12 +19,8 @@ export class DashboardComponent {
     this.showAddData = showAddData;
   }
 
-  showNotificationMessage(notificationData: { message: string; type: string }) {
-    this.notificationMessage = notificationData.message;
-    this.isRegistered = notificationData.type === 'registered';
-    this.showNotification = true;
-    setTimeout(() => {
-      this.showNotification = false;
-    }, 5000);
+  showModalMessage(notificationData: { message: string; type: string }) {
+    this.modalMessage = notificationData.message;
+    this.showModal = true;
   }
 }

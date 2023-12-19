@@ -21,7 +21,8 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
-
+import { ModalComponent } from './modal/modal.component';
+import { MatCardModule } from '@angular/material/card';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,6 +32,7 @@ import { MatTableModule } from '@angular/material/table';
     HeaderComponent,
     ButtonComponent,
     LoadingSpinnerComponent,
+    ModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,7 +50,8 @@ import { MatTableModule } from '@angular/material/table';
     MatNativeDateModule,
     MatToolbarModule,
     MatPaginatorModule,
-    MatTableModule
+    MatCardModule,
+    MatTableModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

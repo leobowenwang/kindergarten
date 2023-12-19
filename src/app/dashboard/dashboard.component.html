@@ -1,10 +1,7 @@
 <app-data [currentPage]="currentPage" (selectPageEvent)="receiveMessage($event)"
-    (operationSuccess)="showNotificationMessage($event)"></app-data>
+    (operationSuccess)="showModalMessage($event)"></app-data>
 <br>
 <app-button [showAddData]="showAddData" (toggleButtonClickEvent)="toggleButtonClicked($event)"></app-button>
 <app-add-data *ngIf="showAddData" [currentPage]="currentPage"
-    (operationSuccess)="showNotificationMessage($event)"></app-add-data>
-
-<div *ngIf="showNotification" class="alert" [ngClass]="{'alert-success': isRegistered, 'alert-danger': !isRegistered}">
-    {{ notificationMessage }}
-</div>
+    (operationSuccess)="showModalMessage($event)"></app-add-data>
+<app-modal [message]="modalMessage" [show]="showModal" (close)="showModal = false"></app-modal>
