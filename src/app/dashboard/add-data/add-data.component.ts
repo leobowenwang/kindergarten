@@ -1,9 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { BackendService } from 'src/app/shared/backend.service';
 import { StoreService } from 'src/app/shared/store.service';
 
 import { AbstractControl, ValidatorFn } from '@angular/forms';
+import { Output } from '@angular/core';
 
 function dateRangeValidator(minDate: Date, maxDate: Date): ValidatorFn {
   return (control: AbstractControl): { [key: string]: boolean } | null => {
@@ -21,8 +22,6 @@ function dateRangeValidator(minDate: Date, maxDate: Date): ValidatorFn {
   styleUrls: ['./add-data.component.scss'],
 })
 export class AddDataComponent implements OnInit {
-  showNotification = false;
-
   constructor(
     private formbuilder: FormBuilder,
     public storeService: StoreService,
@@ -31,6 +30,7 @@ export class AddDataComponent implements OnInit {
   public addChildForm: any;
   @Input() currentPage!: number;
   @Input() currentPageSize!: number;
+  @Output() operationSuccess = new EventEmitter<{ message: string; type: string; }>();
 
   ngOnInit(): void {
     const minDate = new Date('2018-01-01');
@@ -50,15 +50,14 @@ export class AddDataComponent implements OnInit {
     if (this.addChildForm.valid) {
       console.log(this.currentPage);
       this.backendService
-        .addChildData(
-          this.addChildForm.value,
-          this.currentPage,
-          this.currentPageSize
-        )
-        .subscribe(() => {
-          this.showNotification = true;
-          setTimeout(() => (this.showNotification = false), 3000);
-        });
+      .addChildData(
+        this.addChildForm.value,
+        this.currentPage,
+        this.currentPageSize
+      )
+      .subscribe(() => {
+        this.operationSuccess.emit({ message: 'Kind erfolgreich registriert!', type: 'registered' });
+      });
     }
   }
 }

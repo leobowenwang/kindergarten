@@ -19,7 +19,7 @@ export class DataComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @Input() currentPage: number = 1;
   @Output() selectPageEvent = new EventEmitter<number>();
-  showNotification = false;
+  @Output() operationSuccess = new EventEmitter<{ message: string; type: string; }>();
 
   displayedColumns: string[] = [
     'name',
@@ -64,11 +64,10 @@ export class DataComponent implements OnInit {
   public cancelRegistration(childId: string): void {
     if (this.paginator) {
       this.backendService
-        .deleteChildData(childId, this.currentPage, this.paginator.pageSize)
-        .subscribe(() => {
-          this.showNotification = true;
-          setTimeout(() => (this.showNotification = false), 3000);
-        });
+      .deleteChildData(childId, this.currentPage, this.paginator.pageSize)
+      .subscribe(() => {
+        this.operationSuccess.emit({ message: 'Kind erfolgreich abgemeldet!', type: 'abgemeldet' });
+      });
     }
   }
 }

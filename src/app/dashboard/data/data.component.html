@@ -42,8 +42,4 @@
     <mat-paginator [length]="storeService.childrenTotalCount" [pageSize]="5" [pageSizeOptions]="[3, 5, 10]"
         (page)="selectPage($event)">
     </mat-paginator>
-
-    <div *ngIf="showNotification" class="alert alert-danger mt-3">
-        Kind erfolgreich abgemeldet!
-    </div>
 </div>
