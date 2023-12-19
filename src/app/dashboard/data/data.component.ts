@@ -18,8 +18,9 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 export class DataComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @Input() currentPage: number = 1;
-  @Input() currentPageSize: number = 3;
+  @Input() currentPageSize: number = 2;
   @Output() selectPageEvent = new EventEmitter<number>();
+  showNotification = false;
 
   displayedColumns: string[] = [
     'name',
@@ -57,10 +58,11 @@ export class DataComponent implements OnInit {
   }
 
   public cancelRegistration(childId: string) {
-    this.backendService.deleteChildData(
-      childId,
-      this.currentPage,
-      this.currentPageSize
-    );
+    this.backendService
+      .deleteChildData(childId, this.currentPage, this.currentPageSize)
+      .subscribe(() => {
+        this.showNotification = true;
+        setTimeout(() => (this.showNotification = false), 3000);
+      });
   }
 }

@@ -45,11 +45,13 @@ export class BackendService {
       .pipe(tap(() => this.getChildren(page, pageSize)));
   }
 
-  public deleteChildData(childId: string, page: number, pageSize: number) {
-    this.http
+  public deleteChildData(
+    childId: string,
+    page: number,
+    pageSize: number
+  ): Observable<any> {
+    return this.http
       .delete(`http://localhost:5000/childs/${childId}`)
-      .subscribe(() => {
-        this.getChildren(page, pageSize);
-      });
+      .pipe(tap(() => this.getChildren(page, pageSize)));
   }
 }
