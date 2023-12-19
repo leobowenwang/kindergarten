@@ -5,9 +5,13 @@
         <br>
         <app-button [showAddData]="showAddData" (toggleButtonClickEvent)="toggleButtonClicked($event)"></app-button>
     </div>
-    <div class="form-container">
-        <app-add-data *ngIf="showAddData" [currentPage]="currentPage"
-            (operationSuccess)="showModalMessage($event)"></app-add-data>
-        <app-modal [message]="modalMessage" [show]="showModal" (close)="showModal = false"></app-modal>
+    <hr class="divider-line">
+
+    <div class="add-data-container">
+        <div class="form-container">
+            <app-add-data *ngIf="showAddData" [currentPage]="currentPage"
+                (operationSuccess)="showModalMessage($event)"></app-add-data>
+            <app-modal [message]="modalMessage" [show]="showModal" (close)="showModal = false"></app-modal>
+        </div>
     </div>
 </div>
