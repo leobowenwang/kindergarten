@@ -1,4 +1,5 @@
 export interface Kindergarden {
+    images: any;
     id: number;
     name: string;
     address: string;

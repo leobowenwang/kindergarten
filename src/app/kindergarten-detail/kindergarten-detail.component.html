@@ -1,4 +1,25 @@
-<div *ngIf="kindergarten">
-  <h1>{{ kindergarten.name }}</h1>
-  <p>{{ kindergarten.address }}</p>
+<div *ngIf="kindergarten" class="kindergarten-details">
+
+  <mat-card>
+    <div class="back-button">
+      <button mat-button (click)="goBack()">Back to List</button>
+    </div>
+    <mat-card-header>
+      <mat-card-title>{{ kindergarten.name }}</mat-card-title>
+      <mat-card-subtitle>{{ kindergarten.address }}</mat-card-subtitle>
+    </mat-card-header>
+    <div class="images" *ngIf="kindergarten.images && kindergarten.images.length">
+      <img [src]="kindergarten.images[currentImageIndex]" alt="Image of {{ kindergarten.name }}">
+      <button mat-icon-button (click)="previousImage()" *ngIf="kindergarten.images.length > 1">
+        <mat-icon>chevron_left</mat-icon>
+      </button>
+      <button mat-icon-button (click)="nextImage()" *ngIf="kindergarten.images.length > 1">
+        <mat-icon>chevron_right</mat-icon>
+      </button>
+    </div>
+    <mat-card-content>
+      <p>Betreiber: {{ kindergarten.betreiber }}</p>
+      <p>Typ: {{ kindergarten.typ }}</p>
+    </mat-card-content>
+  </mat-card>
 </div>

@@ -9,7 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class KindergartenDetailComponent implements OnInit {
   kindergarten: Kindergarden | null = null;
-
+  currentImageIndex = 0; // Current image index
   constructor(
     private route: ActivatedRoute,
     private backendService: BackendService,
@@ -28,5 +28,23 @@ export class KindergartenDetailComponent implements OnInit {
         this.router.navigate(['/dashboard']);
       }
     });
+  }
+  goBack(): void {
+    this.router.navigate(['/kindergarten-list']);
+  }
+
+  nextImage(): void {
+    if (this.kindergarten && this.kindergarten.images) {
+      this.currentImageIndex =
+        (this.currentImageIndex + 1) % this.kindergarten.images.length;
+    }
+  }
+
+  previousImage(): void {
+    if (this.kindergarten && this.kindergarten.images) {
+      this.currentImageIndex =
+        (this.currentImageIndex - 1 + this.kindergarten.images.length) %
+        this.kindergarten.images.length;
+    }
   }
 }

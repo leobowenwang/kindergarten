@@ -1,0 +1,30 @@
+.kindergarten-details {
+    .images {
+      position: relative;
+      max-height: 500px;
+      img {
+        max-height: 100%;
+        width: auto;
+        display: block;
+        margin: auto;
+      }
+      button {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+        &:first-child {
+          left: 10px;
+        }
+        &:last-child {
+          right: 10px;
+        }
+      }
+    }
+  }
+  
+  .back-button {
+    margin: 20px 0;
+  }
+  
