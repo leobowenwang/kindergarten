@@ -4,60 +4,70 @@
       "id": "_iL77oo",
       "name": "Viktor Sachs 3",
       "birthDate": "2022-06-04",
-      "kindergardenId": 4
+      "kindergardenId": 4,
+      "enrollmentDate": "2023-01-15"
     },
     {
       "id": "_iL790m",
       "name": "Emily Nilson 4",
       "birthDate": "2019-01-04",
-      "kindergardenId": 2
+      "kindergardenId": 2,
+      "enrollmentDate": "2021-09-08"
     },
     {
       "id": "_iL790m",
       "name": "Tom Reiner 5",
       "birthDate": "2019-01-04",
-      "kindergardenId": 2
+      "kindergardenId": 2,
+      "enrollmentDate": "2022-03-20"
     },
     {
       "id": "_iL790m",
       "name": "Michael Mittner 6",
       "birthDate": "2019-01-04",
-      "kindergardenId": 2
+      "kindergardenId": 2,
+      "enrollmentDate": "2022-05-10"
     },
     {
       "id": "_iL790m",
       "name": "Nikolaus Polarius 7",
       "birthDate": "2019-01-04",
-      "kindergardenId": 2
+      "kindergardenId": 2,
+      "enrollmentDate": "2022-07-15"
     },
     {
       "name": "Paulus Fensterl 8",
       "kindergardenId": 2,
       "birthDate": "2023-09-28",
+      "enrollmentDate": "2024-01-05",
       "id": "9py_fwi"
     },
     {
       "name": "Heidi aus den Bergen 9",
       "kindergardenId": 2,
       "birthDate": "2023-10-05",
+      "enrollmentDate": "2024-02-10",
       "id": "hOHEFCv"
     },
     {
       "name": "Traude Widmann 10",
       "kindergardenId": 2,
       "birthDate": "2023-10-05",
+      "enrollmentDate": "2024-03-15",
       "id": "cu0_2Ad"
     },
     {
       "name": "Heiner Kühlschrank 11",
       "kindergardenId": 2,
       "birthDate": "2023-10-26",
+      "enrollmentDate": "2024-04-20",
       "id": "ip57WMS"
     },
     {
       "name": "Nicole Witz 12",
       "kindergardenId": 3,
       "birthDate": "2023-10-13",
+      "enrollmentDate": "2024-02-01",
       "id": "JmbNaBH"
     }
   ],
