@@ -1,4 +1,24 @@
 <div class="container">
+
+    <mat-form-field appearance="fill">
+        <mat-label>Kindergarten</mat-label>
+        <mat-select [(ngModel)]="selectedKindergartenId" (selectionChange)="onKindergartenChange()">
+            <mat-option value="">All Kindergartens</mat-option>
+            <mat-option *ngFor="let kg of storeService.kindergardens" [value]="kg.id">{{ kg.name }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Sort Order</mat-label>
+        <mat-select [(ngModel)]="selectedSortOrder" (selectionChange)="onSortChange()">
+            <mat-option value="name-asc">Name Ascending</mat-option>
+            <mat-option value="name-desc">Name Descending</mat-option>
+            <mat-option value="enrollment_date-asc">Date Ascending</mat-option>
+            <mat-option value="enrollment_date-desc">Date Descending</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+
     <mat-table [dataSource]="storeService.children" class="mat-elevation-z8">
 
 
@@ -25,6 +45,11 @@
         <ng-container matColumnDef="birthdate">
             <th mat-header-cell *matHeaderCellDef> Geburtsdatum </th>
             <td mat-cell *matCellDef="let element"> {{element.birthDate | date:'longDate'}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="enrollmentDate">
+            <th mat-header-cell *matHeaderCellDef> Enrollment Date </th>
+            <td mat-cell *matCellDef="let element"> {{element.enrollmentDate | date:'longDate'}} </td>
         </ng-container>
 
         <ng-container matColumnDef="actions">

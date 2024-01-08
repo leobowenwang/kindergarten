@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Kindergarden } from './interfaces/Kindergarden';
 import { StoreService } from './store.service';
 import { Child, ChildResponse } from './interfaces/Child';
-import { CHILDREN_PER_PAGE } from './constants';
 import { Observable, tap } from 'rxjs';
 
 @Injectable({
@@ -20,12 +19,26 @@ export class BackendService {
       });
   }
 
-  public getChildren(page: number, pageSize: number) {
+  public getChildren(
+    page: number,
+    pageSize: number,
+    kindergartenId?: number,
+    sortOrder?: string
+  ): void {
+    let query = `http://localhost:5000/childs?_expand=kindergarden&_page=${page}&_limit=${pageSize}`;
+
+    if (kindergartenId) {
+      query += `&kindergardenId=${kindergartenId}`;
+    }
+
+    if (sortOrder) {
+      const [sortField, order] = sortOrder.split('-');
+      query += `&_sort=${sortField}&_order=${order}`;
+    }
+
+    console.log('API Query:', query);
     this.http
-      .get<ChildResponse[]>(
-        `http://localhost:5000/childs?_expand=kindergarden&_page=${page}&_limit=${pageSize}`,
-        { observe: 'response' }
-      )
+      .get<ChildResponse[]>(query, { observe: 'response' })
       .subscribe((data) => {
         this.storeService.children = data.body!;
         this.storeService.childrenTotalCount = Number(

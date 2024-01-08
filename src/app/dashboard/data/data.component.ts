@@ -1,4 +1,5 @@
 import {
+  ChangeDetectorRef,
   Component,
   EventEmitter,
   Input,
@@ -19,7 +20,10 @@ export class DataComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @Input() currentPage: number = 1;
   @Output() selectPageEvent = new EventEmitter<number>();
-  @Output() operationSuccess = new EventEmitter<{ message: string; type: string; }>();
+  @Output() operationSuccess = new EventEmitter<{
+    message: string;
+    type: string;
+  }>();
 
   displayedColumns: string[] = [
     'name',
@@ -27,19 +31,24 @@ export class DataComponent implements OnInit {
     'address',
     'age',
     'birthdate',
+    'enrollmentDate',
     'actions',
   ];
+  
+
+  selectedKindergartenId?: number;
+  selectedSortOrder?: string;
 
   constructor(
     public storeService: StoreService,
-    private backendService: BackendService
+    private backendService: BackendService,
+    private changeDetectorRef: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {}
 
   ngAfterViewInit(): void {
-    const pageSize = this.paginator.pageSize;
-    this.backendService.getChildren(this.currentPage, pageSize);
+    this.fetchChildrenData();
   }
 
   getAge(birthDate: string): number {
@@ -58,16 +67,53 @@ export class DataComponent implements OnInit {
 
   selectPage(event: PageEvent): void {
     this.currentPage = event.pageIndex + 1;
-    this.backendService.getChildren(this.currentPage, event.pageSize);
+    this.backendService.getChildren(
+      this.currentPage,
+      event.pageSize,
+      this.selectedKindergartenId,
+      this.selectedSortOrder
+    );
   }
 
   public cancelRegistration(childId: string): void {
     if (this.paginator) {
       this.backendService
-      .deleteChildData(childId, this.currentPage, this.paginator.pageSize)
-      .subscribe(() => {
-        this.operationSuccess.emit({ message: 'Kind erfolgreich abgemeldet!', type: 'abgemeldet' });
-      });
+        .deleteChildData(childId, this.currentPage, this.paginator.pageSize)
+        .subscribe(() => {
+          this.operationSuccess.emit({
+            message: 'Kind erfolgreich abgemeldet!',
+            type: 'abgemeldet',
+          });
+        });
+    }
+  }
+
+  onKindergartenChange(): void {
+    this.resetPaginator();
+    this.fetchChildrenData();
+  }
+
+  onSortChange(): void {
+    this.resetPaginator();
+    this.fetchChildrenData();
+  }
+
+  private resetPaginator(): void {
+    if (this.paginator) {
+      this.paginator.pageIndex = 0;
+      this.currentPage = 1;
+      this.changeDetectorRef.detectChanges();
+    }
+  }
+
+  private fetchChildrenData(): void {
+    if (this.paginator) {
+      this.backendService.getChildren(
+        this.currentPage,
+        this.paginator.pageSize,
+        this.selectedKindergartenId,
+        this.selectedSortOrder
+      );
     }
   }
 }
