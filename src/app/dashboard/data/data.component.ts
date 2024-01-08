@@ -10,6 +10,7 @@ import {
 import { BackendService } from 'src/app/shared/backend.service';
 import { StoreService } from 'src/app/shared/store.service';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { Kindergarden } from 'src/app/shared/interfaces/Kindergarden';
 
 @Component({
   selector: 'app-data',
@@ -34,10 +35,10 @@ export class DataComponent implements OnInit {
     'enrollmentDate',
     'actions',
   ];
-  
 
   selectedKindergartenId?: number;
   selectedSortOrder?: string;
+  kindergartens: Kindergarden[] = [];
 
   constructor(
     public storeService: StoreService,
@@ -45,7 +46,11 @@ export class DataComponent implements OnInit {
     private changeDetectorRef: ChangeDetectorRef
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.backendService.getKindergardens().subscribe((data) => {
+      this.kindergartens = data;
+    });
+  }
 
   ngAfterViewInit(): void {
     this.fetchChildrenData();

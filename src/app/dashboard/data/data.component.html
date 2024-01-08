@@ -4,7 +4,7 @@
         <mat-label>Kindergarten</mat-label>
         <mat-select [(ngModel)]="selectedKindergartenId" (selectionChange)="onKindergartenChange()">
             <mat-option value="">All Kindergartens</mat-option>
-            <mat-option *ngFor="let kg of storeService.kindergardens" [value]="kg.id">{{ kg.name }}</mat-option>
+            <mat-option *ngFor="let kg of kindergartens" [value]="kg.id">{{ kg.name }}</mat-option>
         </mat-select>
     </mat-form-field>
 

@@ -1,0 +1,12 @@
+<div class="mat-card-container">
+    <div *ngFor="let kg of kindergartens">
+        <mat-card class="mat-card">
+            <mat-card-content>
+                <h3>{{ kg.name }}</h3>
+                <p>{{ kg.address }}</p>
+            </mat-card-content>
+            <a mat-flat-button class="mat-primary" [routerLink]="['/kindergarten-detail', kg.id]">View Details</a>
+
+        </mat-card>
+    </div>
+</div>

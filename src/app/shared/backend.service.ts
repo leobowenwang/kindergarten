@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable, tap } from 'rxjs';
+import { Child, ChildResponse } from './interfaces/Child';
 import { Kindergarden } from './interfaces/Kindergarden';
 import { StoreService } from './store.service';
-import { Child, ChildResponse } from './interfaces/Child';
-import { Observable, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -11,12 +11,8 @@ import { Observable, tap } from 'rxjs';
 export class BackendService {
   constructor(private http: HttpClient, private storeService: StoreService) {}
 
-  public getKindergardens() {
-    this.http
-      .get<Kindergarden[]>('http://localhost:5000/kindergardens')
-      .subscribe((data) => {
-        this.storeService.kindergardens = data;
-      });
+  public getKindergardens(): Observable<Kindergarden[]> {
+    return this.http.get<Kindergarden[]>('http://localhost:5000/kindergardens');
   }
 
   public getChildren(
@@ -66,5 +62,11 @@ export class BackendService {
     return this.http
       .delete(`http://localhost:5000/childs/${childId}`)
       .pipe(tap(() => this.getChildren(page, pageSize)));
+  }
+
+  public getKindergartenById(id: number): Observable<Kindergarden> {
+    return this.http.get<Kindergarden>(
+      `http://localhost:5000/kindergardens/${id}`
+    );
   }
 }

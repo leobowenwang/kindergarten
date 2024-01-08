@@ -24,6 +24,8 @@ import { MatTableModule } from '@angular/material/table';
 import { ModalComponent } from './modal/modal.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
+import { KindergartenDetailComponent } from './kindergarten-detail/kindergarten-detail.component';
+import { KindergartenListComponent } from './kindergarten-list/kindergarten-list.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,6 +36,8 @@ import { MatIconModule } from '@angular/material/icon';
     ButtonComponent,
     LoadingSpinnerComponent,
     ModalComponent,
+    KindergartenDetailComponent,
+    KindergartenListComponent,
   ],
   imports: [
     BrowserModule,
