@@ -43,12 +43,12 @@
 
         <ng-container matColumnDef="birthdate">
             <th mat-header-cell *matHeaderCellDef> Geburtsdatum </th>
-            <td mat-cell *matCellDef="let element"> {{element.birthDate | date:'longDate'}} </td>
+            <td mat-cell *matCellDef="let element"> {{ element.birthDate | date: 'longDate':'':'de-AT' }} </td>
         </ng-container>
 
         <ng-container matColumnDef="enrollmentDate">
             <th mat-header-cell *matHeaderCellDef> Einschreibungsdatum </th>
-            <td mat-cell *matCellDef="let element"> {{element.enrollmentDate | date:'longDate'}} </td>
+            <td mat-cell *matCellDef="let element"> {{ element.enrollmentDate | date: 'longDate':'':'de-AT' }} </td>
         </ng-container>
 
         <ng-container matColumnDef="actions">

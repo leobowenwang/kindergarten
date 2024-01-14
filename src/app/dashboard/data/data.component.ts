@@ -11,6 +11,9 @@ import { BackendService } from 'src/app/shared/backend.service';
 import { StoreService } from 'src/app/shared/store.service';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { Kindergarden } from 'src/app/shared/interfaces/Kindergarden';
+import { registerLocaleData } from '@angular/common';
+import localeDeAt from '@angular/common/locales/de-AT';
+registerLocaleData(localeDeAt);
 
 @Component({
   selector: 'app-data',
