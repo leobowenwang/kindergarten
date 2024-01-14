@@ -49,9 +49,13 @@ export class BackendService {
     page: number,
     pageSize: number
   ): Observable<any> {
-    return this.http
-      .post('http://localhost:5000/childs', child)
-      .pipe(tap(() => this.getChildren(page, pageSize)));
+    this.storeService.isLoading = true;
+    return this.http.post('http://localhost:5000/childs', child).pipe(
+      tap(() => {
+        this.getChildren(page, pageSize);
+        this.storeService.isLoading = false;
+      })
+    );
   }
 
   public deleteChildData(
@@ -59,9 +63,13 @@ export class BackendService {
     page: number,
     pageSize: number
   ): Observable<any> {
-    return this.http
-      .delete(`http://localhost:5000/childs/${childId}`)
-      .pipe(tap(() => this.getChildren(page, pageSize)));
+    this.storeService.isLoading = true;
+    return this.http.delete(`http://localhost:5000/childs/${childId}`).pipe(
+      tap(() => {
+        this.getChildren(page, pageSize);
+        this.storeService.isLoading = false;
+      })
+    );
   }
 
   public getKindergartenById(id: number): Observable<Kindergarden> {
