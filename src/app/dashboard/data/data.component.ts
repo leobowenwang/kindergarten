@@ -14,11 +14,41 @@ import { Kindergarden } from 'src/app/shared/interfaces/Kindergarden';
 import { registerLocaleData } from '@angular/common';
 import localeDeAt from '@angular/common/locales/de-AT';
 registerLocaleData(localeDeAt);
+import { MatPaginatorIntl } from '@angular/material/paginator';
+
+const germanPaginatorIntl = new MatPaginatorIntl();
+
+germanPaginatorIntl.itemsPerPageLabel = 'Einträge pro Seite:';
+germanPaginatorIntl.nextPageLabel = 'Nächste Seite';
+germanPaginatorIntl.previousPageLabel = 'Vorherige Seite';
+germanPaginatorIntl.firstPageLabel = 'Erste Seite';
+germanPaginatorIntl.lastPageLabel = 'Letzte Seite';
+germanPaginatorIntl.getRangeLabel = (
+  page: number,
+  pageSize: number,
+  length: number
+) => {
+  if (length === 0 || pageSize === 0) {
+    return `0 von ${length}`;
+  }
+  length = Math.max(length, 0);
+  const startIndex = page * pageSize;
+  const endIndex =
+    startIndex < length
+      ? Math.min(startIndex + pageSize, length)
+      : startIndex + pageSize;
+  return `${startIndex + 1} – ${endIndex} von ${length}`;
+};
+
+export function getGermanPaginatorIntl() {
+  return germanPaginatorIntl;
+}
 
 @Component({
   selector: 'app-data',
   templateUrl: './data.component.html',
   styleUrls: ['./data.component.scss'],
+  providers: [{ provide: MatPaginatorIntl, useValue: germanPaginatorIntl }],
 })
 export class DataComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -38,7 +68,6 @@ export class DataComponent implements OnInit {
     'enrollmentDate',
     'actions',
   ];
-
   selectedKindergartenId?: number;
   selectedSortOrder?: string;
   kindergardens: Kindergarden[] = [];
@@ -50,9 +79,7 @@ export class DataComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.backendService.getKindergardens().subscribe((data) => {
-      this.kindergardens = data;
-    });
+    this.loadKindergardens();
   }
 
   ngAfterViewInit(): void {
@@ -123,5 +150,12 @@ export class DataComponent implements OnInit {
         this.selectedSortOrder
       );
     }
+  }
+
+  private loadKindergardens(): void {
+    this.backendService.getKindergardens().subscribe(
+      (data) => (this.kindergardens = data),
+      (error) => console.error('Error loading kindergartens', error)
+    );
   }
 }
