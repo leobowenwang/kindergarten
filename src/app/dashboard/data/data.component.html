@@ -21,7 +21,6 @@
 
     <mat-table [dataSource]="storeService.children" class="mat-elevation-z8">
 
-
         <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef> Name </th>
             <td mat-cell *matCellDef="let element"> {{element.name}} </td>
@@ -33,7 +32,7 @@
         </ng-container>
 
         <ng-container matColumnDef="address">
-            <th mat-header-cell *matHeaderCellDef> Adresse </th>
+            <th mat-header-cell *matHeaderCellDef> Kindergartenadresse </th>
             <td mat-cell *matCellDef="let element"> {{element.kindergarden.address}} </td>
         </ng-container>
 
@@ -48,7 +47,7 @@
         </ng-container>
 
         <ng-container matColumnDef="enrollmentDate">
-            <th mat-header-cell *matHeaderCellDef> Enrollment Date </th>
+            <th mat-header-cell *matHeaderCellDef> Einschreibungsdatum </th>
             <td mat-cell *matCellDef="let element"> {{element.enrollmentDate | date:'longDate'}} </td>
         </ng-container>
 
