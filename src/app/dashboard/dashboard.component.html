@@ -1,4 +1,7 @@
 <div class="dashboard-container">
+    <div style="text-align: center;">
+        <img src="assets/images/kindergarden.jpg" alt="Kindergarten" style="width: 60%; display: block; margin: auto;">
+    </div>
     <div class="table-container">
         <app-data [currentPage]="currentPage" (selectPageEvent)="receiveMessage($event)"
             (operationSuccess)="showModalMessage($event)"></app-data>
