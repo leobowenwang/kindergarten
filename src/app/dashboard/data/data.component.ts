@@ -38,7 +38,7 @@ export class DataComponent implements OnInit {
 
   selectedKindergartenId?: number;
   selectedSortOrder?: string;
-  kindergartens: Kindergarden[] = [];
+  kindergardens: Kindergarden[] = [];
 
   constructor(
     public storeService: StoreService,
@@ -48,7 +48,7 @@ export class DataComponent implements OnInit {
 
   ngOnInit(): void {
     this.backendService.getKindergardens().subscribe((data) => {
-      this.kindergartens = data;
+      this.kindergardens = data;
     });
   }
 

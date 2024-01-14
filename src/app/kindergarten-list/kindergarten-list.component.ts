@@ -8,13 +8,13 @@ import { Kindergarden } from '../shared/interfaces/Kindergarden';
   styleUrls: ['./kindergarten-list.component.scss']
 })
 export class KindergartenListComponent implements OnInit {
-  kindergartens: Kindergarden[] = [];
+  kindergardens: Kindergarden[] = [];
 
   constructor(private backendService: BackendService) {}
 
   ngOnInit(): void {
     this.backendService.getKindergardens().subscribe((data: Kindergarden[]) => {
-      this.kindergartens = data;
+      this.kindergardens = data;
     });
 
   }

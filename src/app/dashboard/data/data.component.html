@@ -3,8 +3,8 @@
     <mat-form-field appearance="fill">
         <mat-label>Kindergarten</mat-label>
         <mat-select [(ngModel)]="selectedKindergartenId" (selectionChange)="onKindergartenChange()">
-            <mat-option value="">All Kindergartens</mat-option>
-            <mat-option *ngFor="let kg of kindergartens" [value]="kg.id">{{ kg.name }}</mat-option>
+            <mat-option value="">All kindergardens</mat-option>
+            <mat-option *ngFor="let kg of kindergardens" [value]="kg.id">{{ kg.name }}{{ kg.address }}</mat-option>
         </mat-select>
     </mat-form-field>
 

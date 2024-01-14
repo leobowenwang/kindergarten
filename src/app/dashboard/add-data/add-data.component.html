@@ -27,14 +27,14 @@
             <mat-label>Kindergarten</mat-label>
             <mat-select formControlName="kindergardenId">
                 <mat-option value="" disabled>Bitte auswählen</mat-option>
-                <mat-option *ngFor="let kindergarden of storeService.kindergardens" [value]="kindergarden.id">
-                    {{kindergarden.name}}, {{kindergarden.address}}
+                <mat-option *ngFor="let kindergarden of kindergardens " [value]="kindergarden.id">
+                    {{ kindergarden.name }} {{ kindergarden.address }}
                 </mat-option>
             </mat-select>
             <mat-error *ngIf="addChildForm.get('kindergardenId').hasError('required')">
                 Ein Kindergarten muss ausgewählt werden.
             </mat-error>
-        </mat-form-field><br />
+        </mat-form-field>
 
         <button mat-raised-button color="primary" type="submit" class="submit-button">Erfassen</button>
     </form>

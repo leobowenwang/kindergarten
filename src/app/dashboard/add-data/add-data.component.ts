@@ -5,6 +5,7 @@ import { StoreService } from 'src/app/shared/store.service';
 
 import { AbstractControl, ValidatorFn } from '@angular/forms';
 import { Output } from '@angular/core';
+import { Kindergarden } from 'src/app/shared/interfaces/Kindergarden';
 
 function dateRangeValidator(minDate: Date, maxDate: Date): ValidatorFn {
   return (control: AbstractControl): { [key: string]: boolean } | null => {
@@ -34,6 +35,7 @@ export class AddDataComponent implements OnInit {
     message: string;
     type: string;
   }>();
+  kindergardens: Kindergarden[] = [];
 
   ngOnInit(): void {
     const minDate = new Date('2018-01-01');
@@ -46,6 +48,10 @@ export class AddDataComponent implements OnInit {
         '',
         [Validators.required, dateRangeValidator(minDate, today)],
       ],
+    });
+
+    this.backendService.getKindergardens().subscribe((data) => {
+      this.kindergardens = data;
     });
   }
 
