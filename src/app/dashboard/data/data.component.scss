@@ -1,11 +1,12 @@
-button.active {
-    background-color: orange;
+.red-button {
+  background-color: #f44336;
+  color: white;
+  border-radius: 8px;
+  padding: 5px 10px;
+  border: none;
+  transition: background-color 0.3s;
 }
 
-.border-green {
-    border: 1px solid green;
-}
-
-button {
-    margin-right: 5px;
+.red-button:hover {
+  background-color: #ff6666;
 }
